@@ -1,0 +1,24 @@
+{
+  "version": "v4",
+  "repo": "my-koop/type.definitions",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "mykoop/mykoop.d.ts": {
+      "commit": "752be10a0060330c01ff0ffc9b84abec3f289e3f"
+    },
+    "async/async.d.ts": {
+      "commit": "19f97ddf7a0e81bffcf4e4482bb2a3ea6f2bf5b7"
+    },
+    "node/node.d.ts": {
+      "commit": "19f97ddf7a0e81bffcf4e4482bb2a3ea6f2bf5b7"
+    }
+  },
+  "dependencies": {
+    "mykoop": {},
+  },
+  "owned": {
+    "mykoop-communications": {}
+  }
+}
