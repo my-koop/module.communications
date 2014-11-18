@@ -16,7 +16,7 @@
     }
   },
   "dependencies": {
-    "mykoop": {},
+    "mykoop": {}
   },
   "owned": {
     "mykoop-communications": {}
