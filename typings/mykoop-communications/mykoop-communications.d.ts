@@ -7,7 +7,7 @@
 declare module mkcommunications {
 
   interface SendEmailParams {
-    from: string; // email address from which to send
+    from?: string; // email address from which to send
     subject: string;
     message: string; // can be html
     altText?: string; // plain text version of message
