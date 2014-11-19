@@ -1,25 +1,25 @@
 {
-  "name": "mykoop-aws-communications",
+  "name": "mykoop-communications",
   "role": "communications",
   "mykoop": {
     "dependencies": {}
   },
   "version": "1.0.0-rc",
-  "description": "Responsible for communications with AWS services",
+  "description": "Responsible for communications with different communication services",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/my-koop/module.aws-communications.git"
+    "url": "https://github.com/my-koop/module.communications.git"
   },
   "author": "Michael Ferris <https://github.com/Cellule>",
   "license": "GNU GPL v2",
   "bugs": {
-    "url": "https://github.com/my-koop/module.aws-communications/issues"
+    "url": "https://github.com/my-koop/module.communications/issues"
   },
-  "homepage": "https://github.com/my-koop/module.aws-communications",
+  "homepage": "https://github.com/my-koop/module.communications",
   "dependencies": {
     "async": "^0.9.0",
     "mykoop-logger": "git://github.com/my-koop/module.logger",

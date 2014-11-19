@@ -1,4 +1,4 @@
-module.aws-communications
+module.communications
 =========================
 
-Responsible for communications with AWS services
+Responsible for communications with different services
