@@ -29,22 +29,6 @@ class Module extends utils.BaseModule implements mkcommunications.Module {
       logger.warn("No default sender email specified in [sesConfig.json]. " +
         "Set {defaultSender: \"emailValue\"} in file");
     }
-    this.sendTestEmail();
-  }
-
-  sendTestEmail() {
-    this.sendEmail(
-      {
-        to: "success@simulator.amazonses.com",
-        message: "Hello",
-        subject: "Sup"
-      },
-      function(err) {
-        if(err) {
-          logger.error("Error sending test email", err);
-        }
-      }
-    );
   }
 
   sendEmail(params: mkcommunications.SendEmailParams, callback) {
@@ -57,8 +41,7 @@ class Module extends utils.BaseModule implements mkcommunications.Module {
         message: params.message,
         replyTo: params.replyTo,
         subject: params.subject,
-        // Force use the simulator for now since I got to pay for it
-        to: "success@simulator.amazonses.com" || params.to
+        to: params.to
       };
       this.ses.sendemail(sendEmailParams, function(err, data, res) {
         callback(err && new CommunicationError(err));
