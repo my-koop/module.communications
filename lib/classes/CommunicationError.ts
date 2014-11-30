@@ -3,16 +3,11 @@ import utils = require("mykoop-utils");
 class CommunicationError extends utils.errors {
   constructor(
     err: Error,
-    msg?: string,
+    msg: string = "Communication Error",
     ...args: any[]
   ) {
     super(err, msg, args);
-  }
-
-  serialize(): ErrorInterfaces.SerializeResult {
-    return {
-      context: "communication"
-    };
+    this.context = "communication";
   }
 }
 

@@ -44,6 +44,7 @@ class Module extends utils.BaseModule implements mkcommunications.Module {
         to: params.to
       };
       this.ses.sendemail(sendEmailParams, function(err, data, res) {
+        if(err) { logger.verbose(err); }
         callback(err && new CommunicationError(err));
       });
     } else {
