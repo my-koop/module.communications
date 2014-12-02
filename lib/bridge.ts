@@ -1,4 +1,5 @@
 import Module = require("./module");
+import metadata = require("../metadata/index");
 
 class ModuleBridge implements mykoop.IModuleBridge {
   instance: Module;
@@ -13,6 +14,10 @@ class ModuleBridge implements mykoop.IModuleBridge {
 
   getModule() : mykoop.IModule {
     return this.getInstance();
+  }
+
+  getMetaData(callback: mykoop.ModuleMetaDataCallback): void {
+    callback(null, metadata);
   }
 }
 
