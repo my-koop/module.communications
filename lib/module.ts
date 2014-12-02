@@ -1,11 +1,13 @@
 import utils = require("mykoop-utils");
 var logger = utils.getLogger(module);
 var ses = require("node-ses");
+import async = require("async");
 
 import CommunicationError = require("./classes/CommunicationError");
 
 class Module extends utils.BaseModule implements mkcommunications.Module {
   ses = null;
+  core: mkcore.Module;
   sesConfig: {
     key: string;
     secret: string;
@@ -14,6 +16,7 @@ class Module extends utils.BaseModule implements mkcommunications.Module {
   }
 
   init() {
+    this.core = <mkcore.Module>this.getModuleManager().get("core");
     try{
       this.sesConfig = require("sesConfig.json");
     } catch(e) {
@@ -25,28 +28,37 @@ class Module extends utils.BaseModule implements mkcommunications.Module {
       secret: this.sesConfig.secret,
       amazon: this.sesConfig.host
     });
-    if(!this.sesConfig.defaultSender) {
-      logger.warn("No default sender email specified in [sesConfig.json]. " +
-        "Set {defaultSender: \"emailValue\"} in file");
-    }
   }
 
   sendEmail(params: mkcommunications.SendEmailParams, callback) {
+    var self = this;
     if(this.ses) {
-      var sendEmailParams = {
-        altText: params.altText,
-        bcc: params.bcc,
-        cc: params.cc,
-        from: params.from || this.sesConfig.defaultSender,
-        message: params.message,
-        replyTo: params.replyTo,
-        subject: params.subject,
-        to: params.to
-      };
-      this.ses.sendemail(sendEmailParams, function(err, data, res) {
-        if(err) { logger.verbose(err); }
-        callback(err && new CommunicationError(err));
-      });
+      async.waterfall([
+        function(next) {
+          if(!params.from) {
+            return self.core.getSettings({keys: ["globalSender"]}, function(err, configs) {
+              next(err, configs && configs.globalSender);
+            });
+          }
+          next(null, params.from);
+        },
+        function(from, next) {
+          var sendEmailParams = {
+            altText: params.altText,
+            bcc: params.bcc,
+            cc: params.cc,
+            from: from,
+            message: params.message,
+            replyTo: params.replyTo,
+            subject: params.subject,
+            to: params.to
+          };
+          self.ses.sendemail(sendEmailParams, function(err, data, res) {
+            if(err) { logger.verbose(err); }
+            callback(err && new CommunicationError(err));
+          });
+        }
+      ], callback);
     } else {
       callback(new CommunicationError(null, "Email service unavailable"));
     }
