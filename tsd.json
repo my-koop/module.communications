@@ -9,14 +9,18 @@
       "commit": "752be10a0060330c01ff0ffc9b84abec3f289e3f"
     },
     "async/async.d.ts": {
-      "commit": "19f97ddf7a0e81bffcf4e4482bb2a3ea6f2bf5b7"
+      "commit": "c4e024753d4a3f168ef10b2ebb7282ae41659589"
     },
     "node/node.d.ts": {
       "commit": "19f97ddf7a0e81bffcf4e4482bb2a3ea6f2bf5b7"
+    },
+    "mykoop-core/mykoop-core.d.ts": {
+      "commit": "c4e024753d4a3f168ef10b2ebb7282ae41659589"
     }
   },
   "dependencies": {
-    "mykoop": {}
+    "mykoop": {},
+    "mykoop-core": {}
   },
   "owned": {
     "mykoop-communications": {}
