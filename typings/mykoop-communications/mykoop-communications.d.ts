@@ -12,7 +12,7 @@ declare module mkcommunications {
     message: string; // can be html
     altText?: string; // plain text version of message
     // the type should be string | string[], but is not yet supported by typescript
-    to: any; // email address or array of addresses
+    to?: any; // email address or array of addresses
     cc?: any; // email address or array of addresses
     bcc?: any; // email address or array of addresses
     replyTo?: string; // email address
